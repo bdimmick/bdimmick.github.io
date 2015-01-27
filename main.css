@@ -1,0 +1,51 @@
+
+a { 
+	-moz-outline:none; 
+	text-decoration: none;
+}
+a:link { color: #80B4FF; }
+a:visited { color: #80B4FF; }
+a:hover { color: #FFB4FF; }
+a:active { color: #80FFFF; }
+
+blink {
+  -webkit-animation: blink 1s step-end infinite;
+  animation: blink 1s step-end infinite;
+}
+
+@-webkit-keyframes blink {
+  67% { opacity: 0 }
+}
+ 
+@keyframes blink {
+  67% { opacity: 0 }
+}
+
+body { 
+	background: black;
+	background-image: url("img/bw_wood.jpg");
+	border: 0px;
+	color: white;
+	height: 100%; 
+	margin: 0px; 
+	padding: 0px; 
+}
+
+html { height: 100%; }
+
+div#main { margin: 100px 200px 0px 200px; }
+
+div#header {
+	font-family: Courier, monospace;
+	font-size: 32px;
+	padding-left: 5px;
+}
+
+div#terminal {
+	background: black;
+	border: 1px solid white;
+	padding: 5px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+}
