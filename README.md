@@ -1,2 +1,0 @@
-bdimmick.github.io
-==================
