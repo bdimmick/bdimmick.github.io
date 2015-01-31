@@ -74,7 +74,11 @@ commands = {
 		"Prints a file.",
 		function(params) { 
 			output = ""
-			params.forEach(function(f) { output = output + "cat: " + f + ": No such file or directory\n" })
+			params.forEach(function(f) { 
+				$.get('/' + f,
+        	function(data) { output = output + data + "\n" }
+      	).fail( function() { output = output + "cat: " + f + ": No such file or directory\n" })
+			})
 			return output
 		}
 	],
