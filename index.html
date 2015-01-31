@@ -33,10 +33,91 @@ lr-------- 1 bfd bfd    7 Sept 30 2013 current -&gt; twitter
 &gt; cat interests
 cat: interests: No such file or directory
 
-&gt; <blink>_</blink>
-
+&gt; <span id="input"></span><blink>_</blink>
+<div id='output'></div>
 </pre>
 </div>
 </div>
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script>
+execute_on = true
+
+pad_to = function(val, len) {
+	while (val.length < len) {
+		val = val + " "
+	}
+	return val
+}
+
+commands = {
+	'help': [
+		"Displays this message.",
+		function(params) {
+			output = ""
+			keys = []
+			maxlen = 0
+			$.each(commands, function(k, v) { 
+				keys.push(k) 
+				if (k.length > maxlen) {
+					maxlen = k.length
+				}
+			})
+			keys.sort()
+			keys.forEach(function(k) {
+				output = output + pad_to(k, maxlen) + " - " + commands[k][0] + "\n"
+			})
+			return output 
+		}
+	],
+	'cat': [
+		"Prints a file.",
+		function(params) { 
+			output = ""
+			params.forEach(function(f) { output = output + "File '" + f + "' not found.\n" })
+			return output
+		}
+	],
+	'curl': [
+		"Loads a URL in a new window.",
+		function(params) { window.open(params[0]); return "" }
+	]
+}
+
+execute = function(cmd) {
+	if (execute_on) {
+		c = cmd[0]
+		entry = commands[c]
+		output = "'" + c + "' - command not found."
+		if (typeof entry != 'undefined') {
+			cmd.shift()
+			output = entry[1](cmd)
+			if (typeof output == 'undefined') {
+				output = ""
+			}
+		}
+		$('div#output').text("\n" + output)
+	}
+}
+
+$(function() {
+	$('body').keypress(
+		function(event) {
+			if (event.keyCode == 13) {
+				$('span#input').text().split(';').forEach(
+					function(command) {
+						execute(command.trim().split(' '))
+					}
+				)
+				
+				$('span#input').text('')
+			} else {
+				$('span#input').text($('span#input').text() + String.fromCharCode(event.charCode))
+			}
+			event.preventDefault()
+			return false
+		})
+})
+</script>
 	</body>
 </html>
