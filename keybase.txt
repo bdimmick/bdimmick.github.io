@@ -1,0 +1,51 @@
+https://keybase.io/bfd
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://billdimmick.com
+  * I am bfd (https://keybase.io/bfd) on keybase.
+  * I have a public key ASAD1d7dCGlZoHKANB3VGFCFSd4k7eOuTRDGwCjutTUopgo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01015156faf0b7db700a786f3967cb389543582cd75984cff09dc97681e9c34fa7bb0a",
+            "host": "keybase.io",
+            "kid": "012003d5dedd086959a07280341dd518508549de24ede3ae4d10c6c028eeb53528a60a",
+            "uid": "9a083029b9043f7b84c5c41ed2c09f19",
+            "username": "bfd"
+        },
+        "service": {
+            "hostname": "billdimmick.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.16"
+    },
+    "ctime": 1467151289,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1467151266,
+        "hash": "54153edda663edb00198c06adc1eb028c66b5eba45ed24a54f76e78ec36ce3fdcd78e6082767d4d3c2649087542c0a87134a4157a6be8b7608241f8222f9d4ff",
+        "seqno": 502641
+    },
+    "prev": "d4138e673249ade436540e1ba2c1506120bad5b79f06b44a09916a324b78f02d",
+    "seqno": 38,
+    "tag": "signature"
+}
+
+which yields the signature:
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgA9Xe3QhpWaBygDQd1RhQhUneJO3jrk0QxsAo7rU1KKYKp3BheWxvYWTFAvN7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxNTE1NmZhZjBiN2RiNzAwYTc4NmYzOTY3Y2IzODk1NDM1ODJjZDc1OTg0Y2ZmMDlkYzk3NjgxZTljMzRmYTdiYjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwMDNkNWRlZGQwODY5NTlhMDcyODAzNDFkZDUxODUwODU0OWRlMjRlZGUzYWU0ZDEwYzZjMDI4ZWViNTM1MjhhNjBhIiwidWlkIjoiOWEwODMwMjliOTA0M2Y3Yjg0YzVjNDFlZDJjMDlmMTkiLCJ1c2VybmFtZSI6ImJmZCJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiYmlsbGRpbW1pY2suY29tIiwicHJvdG9jb2wiOiJodHRwczoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMTYifSwiY3RpbWUiOjE0NjcxNTEyODksImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJtZXJrbGVfcm9vdCI6eyJjdGltZSI6MTQ2NzE1MTI2NiwiaGFzaCI6IjU0MTUzZWRkYTY2M2VkYjAwMTk4YzA2YWRjMWViMDI4YzY2YjVlYmE0NWVkMjRhNTRmNzZlNzhlYzM2Y2UzZmRjZDc4ZTYwODI3NjdkNGQzYzI2NDkwODc1NDJjMGE4NzEzNGE0MTU3YTZiZThiNzYwODI0MWY4MjIyZjlkNGZmIiwic2Vxbm8iOjUwMjY0MX0sInByZXYiOiJkNDEzOGU2NzMyNDlhZGU0MzY1NDBlMWJhMmMxNTA2MTIwYmFkNWI3OWYwNmI0NGEwOTkxNmEzMjRiNzhmMDJkIiwic2Vxbm8iOjM4LCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQBuO/vGXX+sKHasK0k2n5x1yNUXDAfCqPAOmWUwVk6f8K+IAjlIJ0KAB6lcnUEUlzLttWq7OkCaBxgXnm837Kwioc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCAacRDCQJHpAqR+eBtBLoeu95Jmo78qcQaQaNoiDNdOa6N0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/bfd
+
