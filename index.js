@@ -24,9 +24,9 @@ function setOrGetInput(input, append) {
     if (input !== 'undefined') {
         append = valueOrDefault(append, false)
         if (append) {
-            $('span#input').text(current + v)
+            $('span#input').text(current + input)
         } else {
-            $('span#input').text(v)
+            $('span#input').text(input)
         }
     } else {
         return current
