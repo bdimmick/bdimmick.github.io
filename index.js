@@ -1,5 +1,7 @@
 execute_on = true
 
+deny_cat = ["index.js"]
+
 pad_to = function(val, len) {
 	while (val.length < len) {
 		val = val + " "
@@ -14,9 +16,13 @@ default_value = function(v, def) {
 display_output = function(output, append) {
 	append = default_value(append, false) 
 	if (append) {
-		output = $('div#output').text() + output
+		output = $('div#output').text() + output +"\n"
 	}
 	$('div#output').text(output)
+}
+
+function cat_fail(f) {
+	display_output("cat: " + f + ": No such file or directory", true)
 }
 
 commands = {
@@ -33,7 +39,7 @@ commands = {
 			})
 			keys.sort()
 			keys.forEach(function(k) {
-				display_output(pad_to(k, maxlen) + " - " + commands[k][0] + "\n", true)
+				display_output(pad_to(k, maxlen) + " - " + commands[k][0], true)
 			})
 		}
 	],
@@ -41,9 +47,12 @@ commands = {
 		"Prints a file.",
 		function(params) { 
 			params.forEach(function(f) {
-				$.get('/' + f,
-        	function(data) { display_output(data + "\n", true) }
-      	).fail( function() { display_output("cat: " + f + ": No such file or directory\n", true) })
+				f = f.toLowerCase()
+				if (deny_cat.includes(f)) {
+					cat_fail(f)
+				} else {
+					$.get('/' + f, function(data) { display_output(data, true) }).fail( function() {  cat_fail(f) })
+				}
 			})
 		}
 	],
