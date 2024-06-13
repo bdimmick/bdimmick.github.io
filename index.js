@@ -1,34 +1,48 @@
-hiddenFiles = ["index.js"]
+// DOM elements being used by the functions below:
+let body = $('body')
+let inputSpan = $('span#input')
+let outputDiv = $('div#output')
 
- function addPadding (val, len) {
+// Behavior control data
+let hiddenFiles = ["index.js"]
+
+
+
+function isUndefined(value) {
+    return typeof value !== 'undefined'
+}
+
+function addPadding (val, len) {
     while (val.length < len) {
         val = val + " "
     }
     return val
 }
 
- function valueOrDefault(v, def) {
-    return (typeof v !== 'undefined' ? v : def)
+ function valueOrDefault(value, def) {
+    return (isUndefined(value) ? value : def)
 }
 
  function displayOutput(output, append) {
     append = valueOrDefault(append, false)
     if (append) {
-        output = $('div#output').text() + output + "\n"
+        output = outputDiv.text() + output + "\n"
     }
-    $('div#output').text(output)
+     outputDiv.text(output)
 }
 
 function setOrGetInput(input, append) {
-    current = $('span#input').text()
-    if (input !== 'undefined') {
+    let current = inputSpan.text()
+    if (isUndefined(input)) {
+        console.debug('executing set in setOrGetInput')
         append = valueOrDefault(append, false)
         if (append) {
-            $('span#input').text(current + input)
+            inputSpan.text(current + input)
         } else {
-            $('span#input').text(input)
+            inputSpan.text(input)
         }
     } else {
+        console.debug('executing get in setOrGetInput')
         return current
     }
 }
@@ -41,8 +55,8 @@ commands = {
     'help': [
         "Displays this message.",
         function (params) {
-            keys = []
-            maxlen = 0
+            let keys = []
+            let maxlen = 0
             $.each(commands, function (k, v) {
                 keys.push(k)
                 if (k.length > maxlen) {
@@ -87,37 +101,62 @@ commands = {
 }
 
 function executeCommand (input) {
-    command = input.toString().trim().split(' ')
-    target = command[0]
-    entry = commands[target]
-    displayOutput("")
-    if (typeof entry != 'undefined') {
-        command.shift()
-        entry[1](command)
-    } else {
-        displayOutput("'" + target + "' - command not found.")
+    input = input.toString().trim()
+    if (input.length > 0) {
+        let command = input.toString().trim().split(' ')
+        let target = command[0]
+        let entry = commands[target]
+        displayOutput("")
+        if (isUndefined(entry)) {
+            command.shift()
+            entry[1](command)
+        } else {
+            displayOutput("'" + target + "' - command not found.")
+        }
     }
 }
 
 $(function () {
-    $('body').keypress(
-        function (event) {
-            current = setOrGetInput()
-            if (event.keyCode == 13) { // handle return
-                current.split(';').forEach(
-                    function (command) {
-                        executeCommand(command)
-                    }
-                )
-                setOrGetInput('')
-            } else if (event.keyCode == 8) { // handle delete
-                if (current.length > 0) {
-                    setOrGetInput(current.slice(0, current.length - 1))
-                }
-            } else {
-                setOrGetInput(String.fromCharCode(event.charCode), true)
+    // handles special cases that keypress suppresses or cannot handle
+    let handleKeydown = function (event) {
+        let current = setOrGetInput()
+        let doContinue = true
+        console.debug("keydown w/ " + event.keyCode + " w/ current : " + current)
+        if (event.keyCode === 8) { // handle delete
+            if (current.length > 0) {
+                setOrGetInput(current.slice(0, current.length - 1))
             }
+            doContinue = false
+        }
+
+        if (doContinue) {
+            return true
+        } else {
             event.preventDefault()
             return false
-        })
+        }
+    }
+
+    // handles normal characters and return
+    let handleKeypress = function (event) {
+        let current = setOrGetInput()
+        let keyCode = event.keyCode || event.which
+        console.debug("keypress w/ " + keyCode + " w/ current : " + current)
+        if (keyCode === 13) { // handle return
+            current.split(';').forEach(
+                function (command) {
+                    executeCommand(command)
+                }
+            )
+            setOrGetInput('')
+        } else {
+            setOrGetInput(String.fromCharCode(event.charCode), true)
+        }
+        event.preventDefault()
+        return false
+    }
+
+
+    body.on('keydown', handleKeydown)
+    body.keypress(handleKeypress)
 })
