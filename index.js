@@ -83,16 +83,21 @@ execute = function(cmd) {
 $(function() {
 	$('body').keypress(
 		function(event) {
-			if (event.keyCode == 13) {
-				$('span#input').text().split(';').forEach(
-					function(command) {
+			current = $('span#input').text().toString()
+			if (event.keyCode == 13) { // handle return
+				current.split(';').forEach(
+					function (command) {
 						execute(command.trim().split(' '))
 					}
 				)
-				
+
 				$('span#input').text('')
+			} else if (event.keyCode == 8) { // handle delete
+				if (current.length > 0) {
+					$('span#input').text(current.slice(0, current.length - 1))
+				}
 			} else {
-				$('span#input').text($('span#input').text() + String.fromCharCode(event.charCode))
+				$('span#input').text(current + String.fromCharCode(event.charCode))
 			}
 			event.preventDefault()
 			return false
