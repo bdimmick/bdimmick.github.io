@@ -21,7 +21,7 @@ hiddenFiles = ["index.js"]
 
 function setOrGetInput(input, append) {
     current = $('span#input').text()
-    if (v !== 'undefined') {
+    if (input !== 'undefined') {
         append = valueOrDefault(append, false)
         if (append) {
             $('span#input').text(current + v)
