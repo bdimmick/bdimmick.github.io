@@ -7,16 +7,30 @@ hiddenFiles = ["index.js"]
     return val
 }
 
-valueOrDefault = function (v, def) {
+ function valueOrDefault(v, def) {
     return (typeof v !== 'undefined' ? v : def)
 }
 
-displayOutput = function (output, append) {
+ function displayOutput(output, append) {
     append = valueOrDefault(append, false)
     if (append) {
         output = $('div#output').text() + output + "\n"
     }
     $('div#output').text(output)
+}
+
+function setOrGetInput(input, append) {
+    current = $('span#input').text()
+    if (v !== 'undefined') {
+        append = valueOrDefault(append, false)
+        if (append) {
+            $('span#input').text(current + v)
+        } else {
+            $('span#input').text(v)
+        }
+    } else {
+        return current
+    }
 }
 
 function failCatCommand(f) {
@@ -73,7 +87,7 @@ commands = {
 }
 
 function executeCommand (input) {
-    command = input.trim().split(' ')
+    command = input.toString().trim().split(' ')
     target = command[0]
     entry = commands[target]
     displayOutput("")
@@ -88,21 +102,20 @@ function executeCommand (input) {
 $(function () {
     $('body').keypress(
         function (event) {
-            current = $('span#input').text().toString()
+            current = setOrGetInput()
             if (event.keyCode == 13) { // handle return
                 current.split(';').forEach(
                     function (command) {
-                        executeCommand(command.trim().split(' '))
+                        executeCommand(command)
                     }
                 )
-
-                $('span#input').text('')
+                setOrGetInput('')
             } else if (event.keyCode == 8) { // handle delete
                 if (current.length > 0) {
-                    $('span#input').text(current.slice(0, current.length - 1))
+                    setOrGetInput(current.slice(0, current.length - 1))
                 }
             } else {
-                $('span#input').text(current + String.fromCharCode(event.charCode))
+                setOrGetInput(String.fromCharCode(event.charCode), true)
             }
             event.preventDefault()
             return false
