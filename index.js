@@ -4,7 +4,7 @@ let inputSpan = $('span#input')
 let outputDiv = $('div#output')
 
 // Behavior control data
-let hiddenFiles = ["index.js"]
+let hiddenFiles = ['index.js']
 let defaultExitTarget = 'https://google.com'
 
 
@@ -15,7 +15,7 @@ function isUndefined(value) {
 
 function addPadding (val, len) {
     while (val.length < len) {
-        val = val + " "
+        val = val + ' '
     }
     return val
 }
@@ -27,7 +27,7 @@ function addPadding (val, len) {
  function displayOutput(output, append) {
     append = valueOrDefault(append, false)
     if (append) {
-        output = outputDiv.text() + output + "\n"
+        output = outputDiv.text() + output + '\n'
     }
      outputDiv.text(output)
 }
@@ -49,12 +49,12 @@ function setOrGetInput(input, append) {
 }
 
 function failCatCommand(f) {
-    displayOutput("cat: " + f + ": No such file or directory", true)
+    displayOutput('cat: ' + f + ': No such file or directory', true)
 }
 
 commands = {
     'help': {
-        info: "Displays this message.",
+        info: 'Displays this message.',
         exec: function(params) {
             let keys = []
             let maxlen = 0
@@ -66,12 +66,12 @@ commands = {
             })
             keys.sort()
             keys.forEach(function (k) {
-                displayOutput(addPadding(k, maxlen) + " - " + commands[k].info, true)
+                displayOutput(addPadding(k, maxlen) + ' - ' + commands[k].info, true)
             })
         }
     },
     'cat': {
-        info: "Prints a file.",
+        info: 'Prints a file.',
         exec: function (params) {
             params.forEach(function (f) {
                 f = f.toLowerCase()
@@ -88,7 +88,7 @@ commands = {
         }
     },
     'curl': {
-        info: "Loads a URL in a new window.",
+        info: 'Loads a URL in a new window.',
         exec: function (params) {
             window.open(params[0])
         }
@@ -96,7 +96,7 @@ commands = {
     'clear': {
         info: 'Clears the output.',
         exec: function (params) {
-            displayOutput("")
+            displayOutput('')
         }
     },
     'exit': {
@@ -117,12 +117,12 @@ function executeCommand (input) {
         let command = input.toString().trim().split(' ')
         let target = command[0]
         let entry = commands[target]
-        displayOutput("")
+        displayOutput('')
         if (isUndefined(entry)) {
             command.shift()
             entry.exec(command)
         } else {
-            displayOutput("'" + target + "' - command not found.")
+            displayOutput( target + ' - command not found.')
         }
     }
 }
@@ -132,7 +132,7 @@ $(function () {
     let handleKeydown = function (event) {
         let current = setOrGetInput()
         let doContinue = true
-        console.debug("keydown w/ " + event.keyCode + " w/ current : " + current)
+        console.debug('keydown w/ ' + event.keyCode + ' w/ current : ' + current)
         if (event.keyCode === 8) { // handle delete
             if (current.length > 0) {
                 setOrGetInput(current.slice(0, current.length - 1))
@@ -152,7 +152,7 @@ $(function () {
     let handleKeypress = function (event) {
         let current = setOrGetInput()
         let keyCode = event.keyCode || event.which
-        console.debug("keypress w/ " + keyCode + " w/ current : " + current)
+        console.debug('keypress w/ ' + keyCode + ' w/ current : ' + current)
         if (keyCode === 13) { // handle return
             current.split(';').forEach(
                 function (command) {
