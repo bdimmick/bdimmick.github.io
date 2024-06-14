@@ -52,9 +52,9 @@ function failCatCommand(f) {
 }
 
 commands = {
-    'help': [
-        "Displays this message.",
-        function (params) {
+    'help': {
+        info: "Displays this message.",
+        exec: function(params) {
             let keys = []
             let maxlen = 0
             $.each(commands, function (k, v) {
@@ -65,13 +65,13 @@ commands = {
             })
             keys.sort()
             keys.forEach(function (k) {
-                displayOutput(addPadding(k, maxlen) + " - " + commands[k][0], true)
+                displayOutput(addPadding(k, maxlen) + " - " + commands[k].info, true)
             })
         }
-    ],
-    'cat': [
-        "Prints a file.",
-        function (params) {
+    },
+    'cat': {
+        info: "Prints a file.",
+        exec: function (params) {
             params.forEach(function (f) {
                 f = f.toLowerCase()
                 if (hiddenFiles.includes(f)) {
@@ -85,19 +85,19 @@ commands = {
                 }
             })
         }
-    ],
-    'curl': [
-        "Loads a URL in a new window.",
-        function (params) {
+    },
+    'curl': {
+        info: "Loads a URL in a new window.",
+        exec: function (params) {
             window.open(params[0])
         }
-    ],
-    'clear': [
-        'Clears the output.',
-        function (params) {
+    },
+    'clear': {
+        info: 'Clears the output.',
+        exec: function (params) {
             displayOutput("")
         }
-    ]
+    }
 }
 
 function executeCommand (input) {
@@ -109,7 +109,7 @@ function executeCommand (input) {
         displayOutput("")
         if (isUndefined(entry)) {
             command.shift()
-            entry[1](command)
+            entry.exec(command)
         } else {
             displayOutput("'" + target + "' - command not found.")
         }
