@@ -5,6 +5,7 @@ let outputDiv = $('div#output')
 
 // Behavior control data
 let hiddenFiles = ["index.js"]
+let defaultExitTarget = 'https://google.com'
 
 
 
@@ -96,6 +97,15 @@ commands = {
         info: 'Clears the output.',
         exec: function (params) {
             displayOutput("")
+        }
+    },
+    'exit': {
+        exec: function(params) {
+            if (window.history.length > 0) {
+                window.history.back()
+            } else {
+                window.location.replace(defaultExitTarget)
+            }
         }
     }
 }
