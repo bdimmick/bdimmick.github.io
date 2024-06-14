@@ -100,6 +100,7 @@ commands = {
         }
     },
     'exit': {
+        info: 'Exits this site.',
         exec: function(params) {
             if (window.history.length > 0) {
                 window.history.back()
